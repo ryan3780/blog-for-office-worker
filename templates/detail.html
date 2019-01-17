@@ -9,14 +9,15 @@
   <div class = "row">
     <div class = "col-sm-8">
       <div class = "blog-post">
-        <p>{{ article.content }}</p>
+        <p style="margin-bottom : 30px;"> {{ article.content }} </p>
           </div>
           <!-- template에서는 괄호를 쓰지 않는다 -->
-          <div> {% for comment in article.article_comments.all %}
-            <div>  {{ comment.username }} : {{ comment.content }}</div>
+          <div class = "cs">
+              {% for comment in article.article_comments.all %}
+            <div> &nbsp; {{ comment.username }} : {{ comment.content }} </div>
                 {% endfor %}
               </div>
-                <div class ="reply-form">
+            <div class ="reply-form">
               <!-- action="" 현재 페이지에 전송이라는 말 -->
               <form class = "form-inline" method="post" action="">
                 <!-- django에서 보안 처리 자체 기법 -->
