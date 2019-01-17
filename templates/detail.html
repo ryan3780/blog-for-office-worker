@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+<div class = "container">
+  <div class = "blog-header">
+    <h1 class = "blog-title">{{ article.title }}</h1>
+    <p class = "lead blog-description">The first blog created by Imagineer</p>
+  </div>
+  <div class = "row">
+    <div class = "col-sm-8">
+      <div class = "blog-post">
+        <p>{{ article.content }}</p>
+          </div>
+          <!-- template에서는 괄호를 쓰지 않는다 -->
+          <div> {% for comment in article.article_comments.all %}
+            <div>  {{ comment.username }} : {{ comment.content }}</div>
+                {% endfor %}
+              </div>
+                <div class ="reply-form">
+              <!-- action="" 현재 페이지에 전송이라는 말 -->
+              <form class = "form-inline" method="post" action="">
+                <!-- django에서 보안 처리 자체 기법 -->
+                {% csrf_token %}
+                <div>
+                  <div class="form-group">
+                <!-- name = models.py에 있는 변수를 등록 -->
+                <input class="form-control" placeholder="your name..." name = "username"/>
+              </div>
+            <div class="form-group">
+          <input class="form-control" placeholder="your text..." name = "content"/>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-default" type = "submit">댓글 달기</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      <div class = "col-sm-3 col-sm-offset-1 blog-sidebar">
+    <div class = "sidebar-module"></div>
+      <h4>HashTags</h4>
+        <ol class = "list-unstyled">
+          {% for hashtag in hashtag_list %}
+            <li><a href="/?hashtag={{ hashtag.name }}">#{{ hashtag }}</a></li>
+          {% endfor %}
+        </ol>
+      <div class = "sidebar-module"></div>
+    </div>
+  </div>
+
+
+{% endblock %}
