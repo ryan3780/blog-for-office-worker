@@ -16,6 +16,7 @@ class Article(models.Model):
     )
 
     title = models.CharField(max_length=200)
+    little_title = models.CharField(max_length=100, blank=True, null=True)
     content = models.TextField()
     category = models.CharField(
         max_length=2,
@@ -35,6 +36,11 @@ class Comment(models.Model):
     on_delete = models.CASCADE)
     username = models.CharField(max_length=50)
     content = models.CharField(max_length=200)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
 
     def __str__(self):
         return "{}에 댓글: {}".format(self.article.title, self.content)

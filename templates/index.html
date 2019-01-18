@@ -3,7 +3,7 @@
 {% include "navbar.html" %}
 <div class = "container">
   <div class = "blog-header">
-    <h1 class = "blog-title">Imagineer Blog{{article_list.title}}</h1>
+    <h1 class = "blog-title">Imagineer Blog</h1>
     <p class = "lead blog-description">The first blog created by Imagineer</p>
   </div>
   <div class = "row">
@@ -15,6 +15,7 @@
               {{ article.title }}
                 </a>
               </h2>
+              <h5> 소제목 - {{ article.little_title }} </h5>
             <p>{{ article.content }}</p>
           {% endfor %}
           </div>

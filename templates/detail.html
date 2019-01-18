@@ -5,6 +5,7 @@
   <div class = "blog-header">
     <h1 class = "blog-title">{{ article.title }}</h1>
     <p class = "lead blog-description">The first blog created by Imagineer</p>
+    <h5> 소제목 - {{ article.little_title }} </h5>
   </div>
   <div class = "row">
     <div class = "col-sm-8">
@@ -14,10 +15,14 @@
           <!-- template에서는 괄호를 쓰지 않는다 -->
           <div class = "cs">
               {% for comment in article.article_comments.all %}
-            <div> &nbsp; {{ comment.username }} : {{ comment.content }} </div>
-                {% endfor %}
-              </div>
-            <div class ="reply-form">
+                {% if comment.approved_comment %}
+              <div> &nbsp; {{ comment.username }} : {{ comment.content }} </div>
+                {% if not comment.approved_comment %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+          <div class ="reply-form">
               <!-- action="" 현재 페이지에 전송이라는 말 -->
               <form class = "form-inline" method="post" action="">
                 <!-- django에서 보안 처리 자체 기법 -->
